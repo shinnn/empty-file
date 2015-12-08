@@ -1,6 +1,6 @@
 {
   "name": "empty-file",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Write an empty file asynchronously",
   "repository": "shinnn/empty-file",
   "author": "Shinnosuke Watanabe (https://github.com/shinnn)",
