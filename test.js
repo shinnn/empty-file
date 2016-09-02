@@ -1,4 +1,4 @@
-'use strong';
+'use strict';
 
 const emptyFile = require('.');
 const pify = require('pify');
@@ -11,9 +11,9 @@ const {
 } = pify.all(require('graceful-fs'));
 
 test('emptyFile()', t => {
-  t.plan(9);
+  t.plan(8);
 
-  t.equal(emptyFile.name, 'emptyFile', 'should have a function name.');
+  t.strictEqual(emptyFile.name, 'emptyFile', 'should have a function name.');
 
   emptyFile('tmp0')
   .then(() => readFilePromise('tmp0', 'utf8'))
@@ -29,15 +29,6 @@ test('emptyFile()', t => {
 
   emptyFile('node_modules', null)
   .then(t.fail, err => t.ok(err, 'should fail when it cannot write a file.'))
-  .catch(t.fail);
-
-  emptyFile('__', 'utf8')
-  .then(t.fail, err => {
-    t.ok(
-      /TypeError.*Encoding string is not supported since empty-file writes an empty file\./.test(err),
-      'should not accept encoding string.'
-    );
-  })
   .catch(t.fail);
 
   emptyFile('__', 'utf8')
